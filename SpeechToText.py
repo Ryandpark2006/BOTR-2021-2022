@@ -2,7 +2,7 @@
 # speech to text and text to speech
 import speech_recognition as sr
 import pyttsx3 
-  
+
 # Initialize the recognizer 
 r = sr.Recognizer() 
   
@@ -18,8 +18,9 @@ def SpeakText(command):
       
 # Loop infinitely for user to
 # speak
+count = 0
   
-while(1):    
+while(count < 1):    
       
     # Exception handling to handle
     # exceptions at the runtime
@@ -42,12 +43,15 @@ while(1):
   
             print("Did you say "+MyText)
             SpeakText(MyText)
+            # return "" + MyText            # make this into a method so that it will return string and put into an array, everytime called
+            count += 1
               
     except sr.RequestError as e:
         print("Could not request results; {0}".format(e))
-        count = count + 100
           
     except sr.UnknownValueError:
         print("unknown error occured")
-        count = count + 100
+
+
+# Make commands go into a text file and store it somewhere or an array
     
