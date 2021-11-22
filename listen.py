@@ -1,5 +1,6 @@
 import speech_recognition as sr
-import pyttsx3 
+#import pyttsx3 
+import time
 
 def Listen():
     r = sr.Recognizer() 
@@ -44,5 +45,11 @@ def Listen():
 commands = [None] * 100  #make it wait until it hears a command before going to next line
 for i in range(2):
     commands[i] = Listen()   
+    time.sleep(3)
 
 print(commands)
+
+
+# while command does not contain stop
+# listen and store command
+# do a bunch of if statements on commands (forward, backward, grab, release, turn right, turn left, stop)
