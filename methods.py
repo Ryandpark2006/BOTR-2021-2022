@@ -1,7 +1,11 @@
 import speech_recognition as sr 
 import cv2 as cv
+import threading
+
+commands = [None] * 100
 
 def listen():
+    #https://www.thepythoncode.com/article/using-speech-recognition-to-convert-speech-to-text-python
 
 # create a speech recognition object
     r = sr.Recognizer()
@@ -14,7 +18,8 @@ def listen():
         print("Recognizing...")
         # convert speech to text
         text = r.recognize_google(audio_data)
-        print(text)
+        print(text)   #instead of print store in a string and use if statements to create .contains situations
+        return text
 
 def recieveVideo():
     capture = cv.VideoCapture(0)  #change this to video
@@ -27,6 +32,28 @@ def recieveVideo():
 
     capture.release()
     cv.destroyAllWindows()
-
     cv.waitKey(0)
+
+def alwaysListen():  #only goes for 4 times for some reason
+    while(listen().find('stop') == -1):
+        r = sr.Recognizer()
+
+        with sr.Microphone() as source:
+            audio_data = r.record(source, duration = 2) 
+            print("Recognizing...")
+            try:
+                text = r.recognize_google(audio_data)
+                print(text)  
+                commands.append(text) 
+            except:
+                text = "...."
+                print("....")
+
+    print(commands)
+
+def runSimul():
+    threading.Thread(target=alwaysListen).start()
+    threading.Thread(target=recieveVideo).start()
+
+runSimul()
 
