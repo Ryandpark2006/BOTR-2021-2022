@@ -34,7 +34,7 @@ def recieveVideo():
     cv.destroyAllWindows()
     cv.waitKey(0)
 
-def alwaysListen():  #only goes for 4 times for some reason
+def alwaysListen():  #only goes for 4 times for some reason (have to fix later)
     while(listen().find('stop') == -1):
         r = sr.Recognizer()
 
@@ -50,10 +50,16 @@ def alwaysListen():  #only goes for 4 times for some reason
                 print("....")
 
     print(commands)
+    return commands
 
 def runSimul():
     threading.Thread(target=alwaysListen).start()
     threading.Thread(target=recieveVideo).start()
 
-runSimul()
+def main():
+    runSimul()
+
+if __name__ == "__main__":
+    main()
+
 

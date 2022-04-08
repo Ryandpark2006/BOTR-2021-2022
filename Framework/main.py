@@ -12,9 +12,9 @@
 # IF keyword is detected:
 # execute keyword detected and also take in number which represent distance in feet
 # once executed standby
-#  
 
 
 command = "forward"
 
 if(command.__contains__("forward")):
+    print("forward")
